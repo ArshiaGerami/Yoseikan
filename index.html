@@ -1,6 +1,42 @@
 <html>
 <head>
 <title>Yoseikan-Ryu</title>
+<script test>
+var $el = $("#wrap > div");
+var pageSize = 7;
+
+$el.slice(0, pageSize).css({background: 'yellow', display: 'block'});
+$el.slice(pageSize, $el.length).css({background: 'yellow', display: 'none'});
+
+function addSlice(num){
+  return num + pageSize;
+}
+
+function subtractSlice(num){
+  return num - pageSize;
+}
+
+var slice = [0, pageSize];
+
+$('.next').click(function(){
+   if (slice[1] < $el.length ){ 
+     slice = slice.map(addSlice);   
+   }
+   showSlice(slice);
+});
+
+$('.prev').click(function(){
+  if (slice[0] > 0 ){ 
+    slice = slice.map(subtractSlice); 
+  }
+  showSlice(slice);
+});
+
+function showSlice(slice){
+  $el.css('display', 'none');
+  $el.slice(slice[0], slice[1]).css('display','block');
+}
+</script>
 </head>
 <body>
 <h1>Yoseikan-Ryu online program 0.1</h1>
@@ -50,37 +86,3 @@ Break up your page with a horizontal rule or two. </p>
 
 
 
-var $el = $("#wrap > div");
-var pageSize = 7;
-
-$el.slice(0, pageSize).css({background: 'yellow', display: 'block'});
-$el.slice(pageSize, $el.length).css({background: 'yellow', display: 'none'});
-
-function addSlice(num){
-  return num + pageSize;
-}
-
-function subtractSlice(num){
-  return num - pageSize;
-}
-
-var slice = [0, pageSize];
-
-$('.next').click(function(){
-   if (slice[1] < $el.length ){ 
-     slice = slice.map(addSlice);   
-   }
-   showSlice(slice);
-});
-
-$('.prev').click(function(){
-  if (slice[0] > 0 ){ 
-    slice = slice.map(subtractSlice); 
-  }
-  showSlice(slice);
-});
-
-function showSlice(slice){
-  $el.css('display', 'none');
-  $el.slice(slice[0], slice[1]).css('display','block');
-}
